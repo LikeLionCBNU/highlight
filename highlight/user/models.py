@@ -70,6 +70,5 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     USERNAME_FIELD = 'user_id'
 
-    REQUIRED_FIELDS = ['email','user_type']
-
+    # REQUIRED_FIELDS = ['email','user_type']
     object = CustomUserManager()
