@@ -4,18 +4,20 @@ from django.utils import timezone
 
 # Create your models here.
 class CustomUserManager(BaseUserManager):
-    def create_user(self, user_id, password = None):
+    def create_user(self, user_id, email = None, password = None):
         user = self.model(
             user_id=user_id,
+            email=email,
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, user_id, password):
+    def create_superuser(self, user_id, password, email):
         user = self.create_user(
             password=password,
             user_id=user_id,
+            email=email,
         )
         user.is_superuser = True
         user.save(using=self._db)
@@ -70,5 +72,5 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     USERNAME_FIELD = 'user_id'
 
-    # REQUIRED_FIELDS = ['email','user_type']
+    REQUIRED_FIELDS = ['email']
     object = CustomUserManager()
