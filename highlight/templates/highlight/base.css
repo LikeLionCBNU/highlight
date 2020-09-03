@@ -1,0 +1,47 @@
+.navbar{
+    margin-bottom: 0;
+    background-color: #F29364;
+    border: 0;
+    font-size: 14px !important;
+    letter-spacing: 4px;
+    opacity: 0.9;
+  }
+  
+  .navbar .navbar-brand .logo{
+    width: 100px;
+  }
+  
+  .navbar .navbar-form {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      margin-right: 10px;
+      margin-left: 10px;
+      border: 0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+  
+  
+  .navbar li a, .navbar .navbar-brand {
+    color: #d5d5d5 !important;
+  
+  }
+  
+  .navbar-nav li a:hover {
+    color: #fff !important;
+  }
+  
+  .navbar-nav li.active a {
+    color: #fff !important;
+    background-color:#29292c !important;
+  }
+  
+  .navbar-default .navbar-toggle {
+    border-color: transparent;
+  }
+  
+  #myNavbar{
+    margin-top: 3.5px;
+  
+  }
+  
