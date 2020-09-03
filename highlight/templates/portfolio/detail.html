@@ -1,0 +1,13 @@
+  {% extends 'base.html' %}
+  {% block content %}
+    <h1>포트폴리오 디테일 페이지</h1>
+        <div>
+            <h2>{{portfolio.title}}</h2>
+            <p>{{portfolio.profile}}</p>
+            <p>편집자: {{portfolio.editor}}</p>
+            <p>{{portfolio.production}}</p>
+            <p>{{portfolio.content}}</p>
+            <p>평점: {{portfolio.grade}}</p>
+            <p>가격: {{portfolio.price}}</p>
+        </div> 
+  {% endblock %}

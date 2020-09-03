@@ -1,0 +1,13 @@
+  {% extends 'base.html' %}
+  {% block content %}
+    <div>
+      {% if user.is_authenticated %}
+        <h1>포트폴리오 제작 페이지</h1>
+        <form method = "POST">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <button type = "submit">저장</button>
+        </form>
+      {% endif %}
+    </div>
+  {% endblock %}
