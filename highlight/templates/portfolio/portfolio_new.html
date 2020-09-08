@@ -1,7 +1,7 @@
   {% extends 'base.html' %}
   {% block content %}
     <div>
-      {% if user.is_authenticated %}
+      {% if portfolio.editor == user %}
         <h1>포트폴리오 제작 페이지</h1>
         <form method = "POST">
             {% csrf_token %}
