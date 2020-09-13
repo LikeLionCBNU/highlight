@@ -14,6 +14,7 @@ class Portfolio(models.Model):
     profile = models.ImageField(blank = True)
     grade = models.IntegerField()
     price = models.CharField(max_length = 20)
+    career = models.TextField(blank = True)
 
     def __str__(self):
         return self.title
