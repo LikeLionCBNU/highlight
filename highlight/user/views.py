@@ -26,7 +26,7 @@ def login(request):
         if user is not None:
             print("인증성공")
             auth.login(request, user)
-            return redirect('portfolio')
+            return redirect('main')
         else:
             print("인증실패")
             return render(request, 'user/login_test.html', {'error': '사용자ID 혹은 비밀번호가 잘못되었습니다.'})
