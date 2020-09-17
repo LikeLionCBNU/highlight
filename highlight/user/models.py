@@ -4,7 +4,7 @@ from django.utils import timezone
 
 # Create your models here.
 class CustomUserManager(BaseUserManager):
-    def create_user(self, username, email = None, password = None):
+    def create_user(self, username, email=None, password = None):
         user = self.model(
             username=username,
             email=email,
@@ -46,7 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         max_length=30,
     )
     phone_number=models.CharField(
-        max_length=12,        
+        max_length=13,        
     )
     
     is_active = models.BooleanField(default=True)
