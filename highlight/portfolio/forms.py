@@ -1,7 +1,12 @@
 from django import forms
-from .models import Portfolio
+from .models import Portfolio, Review
 
 class PortfolioForm(forms.ModelForm):
     class Meta:
         model = Portfolio
-        fields = {'title', 'editor', 'content', 'production', 'profile', 'grade', 'price', 'career', }
+        fields = {'title', 'content', 'production', 'profile', 'price', 'career', }
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = {'content', 'grade', }
