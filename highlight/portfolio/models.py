@@ -12,7 +12,6 @@ class Portfolio(models.Model):
     content = models.TextField()
     production = models.CharField(max_length=20)
     profile = models.ImageField(blank = True)
-    grade = models.IntegerField()
     price = models.CharField(max_length = 20)
     career = models.TextField(blank = True)
 
@@ -22,7 +21,7 @@ class Portfolio(models.Model):
 class Review(models.Model):
     # writer = models.ForeignKey(User, on_delete = models.CASCADE)
     writer = models.CharField(max_length=100)
-    content = models.TextField()
+    content = models.TextField(blank = False)
     grade = models.IntegerField()
     published_date = models.DateTimeField(default = timezone.now)
     portfolio = models.ForeignKey(Portfolio, on_delete = models.CASCADE)

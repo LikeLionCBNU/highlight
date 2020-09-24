@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
   <div>
-      <h1>포트폴리오 리스트 페이지</h1>
       {% if user.user_type == 'editor' %}
       <h2><a href = "{% url 'new' %}">포트폴리오 생성하기</a></h2>
       {% endif %}
@@ -9,16 +8,16 @@
       {% for portfolio in portfolio %}
         <div>
           <h2><a href = "{% url 'detail' portfolio.id %}">{{portfolio.title}}</a></h2>
-          <p>{{portfolio.profile}}</p>
-          <p>{{portfolio.editor}}</p>
-          <p>{{portfolio.content}}</p>
-          <p>{{portfolio.production}}</p>
+          <p>프로필 사진: {{portfolio.profile}}</p>
+          <p>작성자: {{portfolio.editor}}</p>
+          <p>내용: {{portfolio.content}}</p>
+          <p>영상: {{portfolio.production}}</p>
         </div>
       {% endfor %}
 
       <div class = "pagination">
         {% if portfolio.has_previous %}
-          <a href="?page=1"> </a>
+          <a href="?page=1"> << </a>
           <a href="?page={{ portfolio.previous_page_number }}"> < </a>
         {% endif %}
 
