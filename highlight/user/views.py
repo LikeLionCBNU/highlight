@@ -1,21 +1,49 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from .models import User
+from .forms import UserLoginForm, UserSignupForm
 from django.contrib import auth
-from django.contrib.auth.models import User
 
 # Create your views here.
 def signup(request):
     if request.method == "POST":
         if request.POST["password"] == request.POST["password_confirm"]:
-            user = User.objects.create_user(
-                username=request.POST["username"],
-                password=request.POST["password"],
-                email=request.POST["email"],
-            )
-            auth.login(request,user)
-            return redirect('user:login')
-        return render(request, 'user/signup.html')
-    return render(request, 'user/signup.html')
+            form = UserSignupForm(request.POST)
+            if form.is_valid():
+                user = User()
+                user = form.save(commit=False)
+                auth.login(request,user)
+                return redirect('main')
+            else:
+                form = UserSignupForm()
+                print('form not valid')
+                print(form.errors)
+                return render(request, 'user/signup.html',{'form':form})
+        else:
+            form = UserSignupForm()
+            print('비밀번호와 비밀번호 확인이 다름')
+            return render(request, 'user/signup.html',{'form':form})
+    else:
+        form = UserSignupForm()
+        print('request not post')
+        return render(request, 'user/signup.html',{'form':form})
+
+
+# def signup(request):
+#     form = UserSignupForm()
+#     if request.method == "POST":
+#         if form.is_valid():
+#             if request.POST["password"] == request.POST["password_confirm"]:
+#                 user = form.save(commit=False)
+#                 auth.login(request,user)
+#                 return redirect('user:login')
+#             else:
+#                 return render(request, 'user/signup.html')
+#         else:
+#             form = UserSignupForm()
+#         return render(request, 'user/signup.html',{'form':form})
+#     return render(request, 'user/signup.html',{'form':form})
+
+    
 
 
 def login(request):
