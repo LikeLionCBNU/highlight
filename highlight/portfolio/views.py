@@ -3,6 +3,7 @@ from .models import Portfolio, Review
 from django.utils import timezone
 from .forms import PortfolioForm, ReviewForm
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def main(request):
@@ -55,6 +56,7 @@ def portfolio_delete(request, portfolio_id):
     else:
         return redirect('detail', portfolio_id = portfolio.pk)
 
+@login_required(login_url='/user/login/')
 def review_new(request, portfolio_id):
     portfolio = get_object_or_404(Portfolio, pk=portfolio_id)
     if request.method == "POST":
