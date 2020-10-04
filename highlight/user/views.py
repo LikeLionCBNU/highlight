@@ -37,7 +37,7 @@ def login(request):
         user = auth.authenticate(request, username=username, password=password)
         if user is not None:
             print("인증성공")
-            auth.login(request.user)
+            auth.login(request, user)
             return redirect('main')
         else:
             print("인증실패")
@@ -45,8 +45,9 @@ def login(request):
     else:
         return render(request, 'user/login.html')
 
+
 def logout(request):
-    auth.logout(request.user)
+    auth.logout(request)
     return redirect('user:login')
 
 def mypage(request):
