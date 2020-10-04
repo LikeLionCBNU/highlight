@@ -4,14 +4,14 @@
             <h1>포트폴리오 디테일 페이지</h1>
             <h2>제목: {{portfolio.title}}</h2>
             <p>프로필 사진: {{portfolio.profile}}</p>
+            <p>평점: </p>
             <p>약력: {{portfolio.career}}</p>
             <p>편집자: {{portfolio.editor}}</p>
             <p>영상: {{portfolio.production}}</p>
             <p>내용: {{portfolio.content}}</p>
             <p>가격: {{portfolio.price}}</p>
             <a href = "{% url 'main' %}">메인</a>
-
-            {% if user.user_type == 'editor' %}
+            {% if user.id == portfolio.editor.id %}
             <a href = "{% url 'edit' portfolio.id %}">수정</a>
             <a href = "{% url 'delete' portfolio.id %}">삭제</a>
             {% endif %}
@@ -25,7 +25,9 @@
         <p>작성자: {{review.writer}}</p>
         <p>작성일: {{review.published_date}}</p>
         <p>평점: {{review.grade}}</p>
+        {% if user.id == review.writer.id %}
         <p><a href="{% url 'review_delete' review_id=review.id %}">삭제</a></p>
+        {% endif %}
         {% endfor %}
         <form action = "{% url 'review_new' portfolio.pk %}" method = "POST">
           {% csrf_token %}
