@@ -4,3 +4,4 @@ from .models import Portfolio, Review
 # Register your models here.
 admin.site.register(Portfolio)
 admin.site.register(Review)
+

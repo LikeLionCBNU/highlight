@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 from user.models import User
 
-
 # Create your models here.
 
 class Portfolio(models.Model):
@@ -13,6 +12,7 @@ class Portfolio(models.Model):
     profile = models.ImageField(blank = True)
     price = models.CharField(max_length = 20)
     career = models.TextField(blank = True)
+    grade = models.FloatField(default=0)
     
     def __str__(self):
         return self.title
@@ -20,9 +20,13 @@ class Portfolio(models.Model):
 class Review(models.Model):
     writer = models.ForeignKey(User, on_delete = models.CASCADE)
     content = models.TextField(blank = False)
-    grade = models.IntegerField()
+    grade = models.FloatField(default=0)
     published_date = models.DateTimeField(default = timezone.now)
     portfolio = models.ForeignKey(Portfolio, on_delete = models.CASCADE)
 
     def __str__(self):
         return self.writer
+
+
+
+
