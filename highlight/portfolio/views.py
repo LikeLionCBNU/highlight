@@ -4,6 +4,7 @@ from django.utils import timezone
 from .forms import PortfolioForm, ReviewForm
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from django.db.models import Avg
 
 # Create your views here.
 def main(request):
@@ -11,12 +12,22 @@ def main(request):
     paginator = Paginator(portfolio, 5)
     page = request.GET.get('page')
     portfolio = paginator.get_page(page)
-    return render(request, 'portfolio/portfolio_main.html', {'portfolio':portfolio})
+
+    return render(request, 'portfolio/portfolio_main.html', {'portfolio' : portfolio})
 
 def detail(request, portfolio_id):
     portfolio_detail = get_object_or_404(Portfolio, pk = portfolio_id)
     reviewForm = ReviewForm()
-    return render(request, 'portfolio/portfolio_detail.html', {'portfolio' : portfolio_detail, 'reviewForm' : reviewForm})
+    reviews = Review.objects.filter(portfolio_id= portfolio_id).order_by()
+
+    average = reviews.aggregate(Avg("grade"))["grade__avg"]
+    if average == None:
+        average = 0
+    average = round(average,2)
+    
+    portfolio_detail.grade = average
+    
+    return render(request, 'portfolio/portfolio_detail.html', {'portfolio' : portfolio_detail, 'reviewForm' : reviewForm, 'average' : average})
 
 def portfolio_new(request):
     if request.user.user_type == 'editor': 
@@ -75,3 +86,6 @@ def review_delete(request, review_id):
     portfolio = review.portfolio
     review.delete()
     return redirect('detail', portfolio_id=portfolio.id)
+
+
+
