@@ -25,9 +25,9 @@
 					</a>
 				</div>
 				{% if user.is_active %}
-				<div class="collapse navbar-collapse" id="myNavbar">
-					{{user.username}}
+				<div class="collapse navbar-collapse" id="myNavbar">					
 					<ul class="nav navbar-nav navbar-right">
+						<li><p>{{user.username}}님, 어서오세요!<p></li>
 						<li><a href="#">편집자 찾기</a></li>
 						<li><a href="{% url 'user:mypage' %}">마이페이지</a></li>
 						<li><a href="{% url 'user:logout' %}">로그아웃</a></li>
@@ -36,7 +36,6 @@
 				</div>
 				{% else %}
 				<div class="collapse navbar-collapse" id="myNavbar">
-					{{user.username}}
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#">편집자 찾기</a></li>
 						<li><a href="{% url 'user:login' %}">로그인</a></li>

@@ -1,9 +1,5 @@
-body{
-  padding-top: 70px;
-}
-
 .navbar{
-    margin-bottom: 0;
+    margin-bottom: 0px;
     background-color: #F29364;
     border: 0;
     font-size: 14px !important;
@@ -46,7 +42,6 @@ body{
   }
   
   #myNavbar{
-    margin-top: 3.5px;
-  
+    margin-top: 3.5px;  
   }
   
