@@ -1,21 +1,46 @@
 {% extends 'base.html' %}
 {% block content %}
+
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+<!-- Custom styles for this template -->
+<link href="portfolio_main.css" rel="stylesheet">
+
+
+{% if user.user_type == 'editor' %}
+<h2><a href = "{% url 'new' %}">포트폴리오 생성하기</a></h2>
+{% endif %}
+
+<body>
+  {% for portfolio in portfolio %}
+  <hr class="featurette-divider">
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading"><a href = "{% url 'detail' portfolio.id %}"> {{portfolio.title}} </a>  </h2>
+      <p class="lead">작성자: {{portfolio.editor}} <br> 평점: {{portfolio.grade}} <br> 내용: {{portfolio.content}} <br> 가격: {{portfolio.price}}</bt></p>
+    </div>
+    <div class="col-md-5">
+      <img class="lead" width="600" height="400" src = "https://postfiles.pstatic.net/MjAyMDEwMjNfNzgg/MDAxNjAzNDM3OTI3Mzc2.kQDj2E4xy5jtGLauYTbXpG6crAqm2rCSa5x18Qw5Uoog.ZJcJc6_XjKYuXezKyLDfsOeHBXxGKajonR607QoV62Yg.JPEG.kippsr3/%EC%9C%A0%ED%8A%9C%EB%B8%8C2.jpg?type=w773" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" alt="video"><rect width="100%" height="100%" fill="#eee"/></img>
+    </div>
+  </div>
+  {% endfor %}
+  <hr class="featurette-divider">
+
   <div>
-      {% if user.user_type == 'editor' %}
-      <h2><a href = "{% url 'new' %}">포트폴리오 생성하기</a></h2>
-      {% endif %}
-
-      {% for portfolio in portfolio %}
-        <div>
-          <h2><a href = "{% url 'detail' portfolio.id %}">{{portfolio.title}}</a></h2>
-          <p>프로필 사진: {{portfolio.profile}}</p>
-          <p>작성자: {{portfolio.editor}}</p>
-          <p>평점: {{portfolio.grade}}</p>
-          <p>내용: {{portfolio.content}}</p>
-          <p>영상: {{portfolio.production}}</p>
-        </div>
-      {% endfor %}
-
       <div class = "pagination">
         {% if portfolio.has_previous %}
           <a href="?page=1"> << </a>
@@ -37,3 +62,4 @@
       </div>
   </div>
 {% endblock %}
+</body>
